@@ -5,61 +5,68 @@ let myLibrary = [];
 const displayLibrary = document.querySelector(".library");
 
 //BOOK OBJECT
-function Book(title, author, pages, read){
+function Book(title, author, pages){
     this.title = title
     this.author = author
     this.pages = pages
-    this.read = read
-    this.info = function() {
-      if (!read){
-        return `${title} by ${author}, ${pages} pages, not read yet`
-      } else {
-        return `${title} by ${author}, ${pages} pages, already read`
-      }
-    }
-  }
-
-//STORES BOOKS IN LIBRARY ARRAY
-function addBookToLibrary(title, author, pages, read) {
-    let numbPages = Number(pages);
-    return myLibrary.push(new Book(title, author, numbPages, read));
 }
 
-
-//LOOP THROUGH LIBRARY
-function loopLibrary() {
-    for (let i = 0; i < myLibrary.length; i++) {
-        const displayBook = document.createElement("div");
-        displayLibrary.appendChild(displayBook);
-        displayBook.setAttribute("id", "book");
-        displayBook.textContent = myLibrary[i].info();
+//STORES BOOKS IN LIBRARY ARRAY
+function addBookToLibrary(title, author, pages) {
+    let numbPages = Number(pages);
+      //create card
+    const displayBook = document.createElement("div");
+    displayLibrary.appendChild(displayBook);
+    displayBook.setAttribute("id", "book");
+    displayBook.setAttribute("data-i", myLibrary.length);
+      //create delete button
+    const delBtn = document.createElement("button");
+    displayBook.appendChild(delBtn);
+    delBtn.textContent = "X";
+    delBtn.setAttribute("id", "delete");
+    delBtn.setAttribute("data-i", myLibrary.length);
+    delBtn.addEventListener('click', deleteButton);
+    function deleteButton() {
+      const btnNumb = delBtn.getAttribute("data-i");
+      const del = document.querySelector(`div[data-i="${btnNumb}"]`);
+      del.style.visibility = "hidden";
     }
-    return;
+      //create card content
+        //title
+      const displayBookTitle = document.createElement("div");
+      displayBook.appendChild(displayBookTitle);
+      displayBookTitle.setAttribute("id", "title");
+      displayBookTitle.textContent = title;
+       //author
+      const displayBookAuthor = document.createElement("div");
+      displayBook.appendChild(displayBookAuthor);
+      displayBookAuthor.setAttribute("id", "author");
+      displayBookAuthor.textContent = author;
+        //page number
+      const displayBookPages = document.createElement("div");
+      displayBook.appendChild(displayBookPages);
+      displayBookPages.setAttribute("id", "pages");
+      displayBookPages.textContent = `${pages} Pages`;
+      //create read check
+    const check = document.createElement("input");
+    displayBook.appendChild(check);
+    check.setAttribute("type", "checkbox");
+    check.setAttribute("id", "read");
+    const label = document.createElement("label");
+    displayBook.appendChild(label);
+    label.setAttribute("for", "read");
+    label.textContent = "Read?";
+  return myLibrary.push(new Book(title, author, numbPages));
 }
 
 //TESTING ARRAY
-addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 295, false);
-addBookToLibrary("Harry Potter", "J.K. Rowling", 200, true);
-addBookToLibrary("Pet Semetary", "Stephan King", 400, true);
-addBookToLibrary("A Game of Thrones", "George R.R. Martin", 500, false);
+addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 295);
+addBookToLibrary("Dune", "Frank Herbert", 412);
+addBookToLibrary("Pet Semetary", "Stephen King", 373);
+addBookToLibrary("A Game of Thrones", "George R.R. Martin", 694);
 
 
 
-//NEW BOOK BUTTON
 
-//when button's clicked, displays a form for someone to input a new book
-//create a form that takes title, author, pages as text and read as radio buttons
-//add button that submits form with addBookToLibrary()
 
-const newBookBtn = document.querySelector("#newBookBtn");
-newBookBtn.addEventListener ('click', testing());
 
-/*
-function testing() {
-  let title = prompt('Book Title', 'Title');
-  let author = prompt('Book Author', 'Anonymous');
-  let pages = prompt('Amount of Pages', 000);
-  let read = prompt('Did you read it yet?', 'No');
-  addBookToLibrary(title, author, pages, read);
-}
-*/
