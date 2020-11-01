@@ -4,20 +4,18 @@
 
         <link href="lib.css" rel="stylesheet">
 
+        <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet"> 
+
     </head>
     <body>
+        <span id="pageTitle">My Library</span>
 
         <form id="libraryForm">
-            Book Title: <input type="text" name="title" placeholder="'The Hobbit'"><br />
+            Title: <input type="text" name="bookTitle" placeholder="'The Hobbit'"><br />
             Author: <input type="text" name="author" placeholder="J.R.R. Tolkein"><br />
             # of Pages: <input type="number" name="pages" placeholder="295"><br />
-            Have you read this book yet? <br />
-                <input type="radio" name="read" value="true" id="true"><label for="true">Yes</label></input>
-                <input type="radio" name="read" value="false" id="false"><label for="false">No</label></input><br />
-            <input type="button" onclick="addBookToLibrary(title.value, author.value, pages.value, read.value)" value="Submit">
+            <input type="button" onclick="addBookToLibrary(bookTitle.value, author.value, pages.value, read.value)" value="Submit">
         </form>
-
-        <center><button id="newBookBtn">New Book</button></center>
 
         <div class="library"></div>
 
