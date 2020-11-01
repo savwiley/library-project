@@ -1,12 +1,81 @@
-#book {
-    display:inline-block;
-    width: 200px;
-    padding: 20px;
-    border: 1px solid #000;
-    border-radius: 25px;
-    text-align:center;
+body {
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    background: #ebebeb;
 }
 
-#newBookBtn {
-    margin-top: 20px;
+input, button {outline:none;}
+
+#pageTitle {
+    float:left;
+    padding: 20px 0 0 10px;
+    font-size: 85px;
+    font-family:Dancing Script;
 }
+
+.library {
+    display:flex;
+    flex-wrap: wrap;
+}
+
+#libraryForm {
+    margin: 0 auto 10px;
+    border: 0px solid;
+    width: 20%;
+    text-align:right;
+}
+#libraryForm input {
+    margin: 5px 0;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+}
+#libraryForm input[type=text], #libraryForm input[type=number] {background: #fff;}
+#libraryForm input[type=text]:hover, #libraryForm input[type=number]:hover {box-shadow: 2px 2px 2px rgba(0,0,0,0.4);}
+#libraryForm input[type=button] {cursor:pointer;}
+#libraryForm input[type=button]:hover {background: #fff;}
+
+
+#book {
+    display:inline-block;
+    width: 100px;
+    height: 300px;
+    padding: 5px 10px 10px;
+    margin: 0 5px 10px;
+    border-radius: 25px;
+    text-align:center;
+    color: #fff;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+#book:nth-child(4n){background: rgb(70, 65, 46);}
+#book:nth-child(4n-1){background: rgb(40, 40, 65);}
+#book:nth-child(4n-2){background: rgb(60, 82, 60);}
+#book:nth-child(4n-3){background: rgb(51, 26, 16);}
+
+#title {
+    font-size: 25px;
+    font-family:Dancing Script;
+    margin: 10px 0;
+    padding-bottom: 10px;
+    border-bottom: 3px solid;
+}
+#author {margin-bottom: 10px;}
+#pages {
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+#delete{
+    display:block;
+    width: 25px;
+    height: 25px;
+    position:relative;
+    left: 78px;
+    border: none;
+    border-radius: 50px;
+    background: rgba(255,255,255,0.3);
+    font-weight:bold;
+    cursor: pointer;
+}
+#delete:hover {background: rgba(255,255,255,0.8)}
+#read {cursor:pointer;}
