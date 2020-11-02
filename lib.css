@@ -10,6 +10,15 @@ input, button {outline:none;}
     padding: 20px 0 0 10px;
     font-size: 85px;
     font-family:Dancing Script;
+    cursor:default;
+}
+
+#credit a{
+    text-align:center;
+    display:block;
+    width: 100%;
+    text-decoration:none;
+    color: rgb(102, 102, 102);
 }
 
 .library {
@@ -31,22 +40,37 @@ input, button {outline:none;}
 }
 #libraryForm input[type=text], #libraryForm input[type=number] {background: #fff;}
 #libraryForm input[type=text]:hover, #libraryForm input[type=number]:hover {box-shadow: 2px 2px 2px rgba(0,0,0,0.4);}
-#libraryForm input[type=button] {cursor:pointer;}
-#libraryForm input[type=button]:hover {background: #fff;}
+#libraryForm input[type=button] {
+    cursor:pointer;
+    color: #000;
+    background: #fff;
+    background-size: 0;
+    transition: all 0.5s ease-in-out;
+}
+#libraryForm input[type=button]:hover {
+    background: linear-gradient(120deg, #fff, #eee);
+    background-repeat:no-repeat;
+    background-size: 100%;
+    background-position: 0% 50%;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.4);
+}
 
 
 #book {
     display:inline-block;
-    width: 100px;
-    height: 300px;
+    min-width: 100px;
+    height: 200px;
     padding: 5px 10px 10px;
     margin: 0 5px 10px;
     border-radius: 25px;
     text-align:center;
     color: #fff;
     box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
-    overflow-y: auto;
-    overflow-x: hidden;
+    transition: all 0.5s;
+}
+#book:hover {
+    z-index: 1;
+    margin-top: -20px;
 }
 #book:nth-child(4n){background: rgb(70, 65, 46);}
 #book:nth-child(4n-1){background: rgb(40, 40, 65);}
@@ -70,12 +94,23 @@ input, button {outline:none;}
     width: 25px;
     height: 25px;
     position:relative;
-    left: 78px;
+    left: 0px;
     border: none;
     border-radius: 50px;
     background: rgba(255,255,255,0.3);
     font-weight:bold;
     cursor: pointer;
+    transition: all 0.5s;
 }
 #delete:hover {background: rgba(255,255,255,0.8)}
 #read {cursor:pointer;}
+
+@media (max-width: 1000px) {
+    #pageTitle, #libraryForm {
+        text-align:center;
+        width: 100%;
+    }
+    #pageTitle {
+        float:none;
+    }
+}
