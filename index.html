@@ -2,9 +2,13 @@
 <html>
     <head>
 
+        <title>MyLibrary App</title>
+
         <link href="lib.css" rel="stylesheet">
 
         <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet"> 
+
+        <script src="https://kit.fontawesome.com/25a49a4783.js" crossorigin="anonymous"></script>
 
     </head>
     <body>
@@ -14,10 +18,12 @@
             Title: <input type="text" name="bookTitle" placeholder="'The Hobbit'"><br />
             Author: <input type="text" name="author" placeholder="J.R.R. Tolkein"><br />
             # of Pages: <input type="number" name="pages" placeholder="295"><br />
-            <input type="button" onclick="addBookToLibrary(bookTitle.value, author.value, pages.value, read.value)" value="Submit">
+            <input type="button" onclick="addBookToLibrary(bookTitle.value, author.value, pages.value)" value="Submit">
         </form>
 
         <div class="library"></div>
+
+        <span id="credit"><a href="https://github.com/savwiley/library-project">by savwiley <i class="fab fa-github"></i></a></span>
 
         <script src="lib.js" type="text/javascript"></script>
     </body>
