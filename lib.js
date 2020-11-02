@@ -14,6 +14,12 @@ function Book(title, author, pages){
 //STORES BOOKS IN LIBRARY ARRAY
 function addBookToLibrary(title, author, pages) {
     let numbPages = Number(pages);
+    if (numbPages <= 0) {
+      return alert("Page number cannot be negative or zero.")
+    }
+    if (title.length <= 0 || author.length <= 0 || pages.length <= 0) {
+      return alert("Please do not leave any forms blank.")
+    }
       //create card
     const displayBook = document.createElement("div");
     displayLibrary.appendChild(displayBook);
@@ -29,7 +35,7 @@ function addBookToLibrary(title, author, pages) {
     function deleteButton() {
       const btnNumb = delBtn.getAttribute("data-i");
       const del = document.querySelector(`div[data-i="${btnNumb}"]`);
-      del.style.visibility = "hidden";
+      del.remove();
     }
       //create card content
         //title
@@ -55,7 +61,7 @@ function addBookToLibrary(title, author, pages) {
     const label = document.createElement("label");
     displayBook.appendChild(label);
     label.setAttribute("for", "read");
-    label.textContent = "Read?";
+    label.textContent = "Finished?";
   return myLibrary.push(new Book(title, author, numbPages));
 }
 
