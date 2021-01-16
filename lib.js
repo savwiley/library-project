@@ -1,30 +1,76 @@
 //LIBRARY
-let myLibrary = [];
+let myLibrary = []; 
+
+/*
+  {"title": "The Hobbit", "author": "J.R.R. Tolkien", "pages": 295}, 
+  {"title": "Dune", "author": "Frank Herbert", "pages": 412}, 
+  {"title": "Pet Semetary", "author": "Stephen King", "pages": 373}, 
+  {"title": "A Game of Thrones", "author": "George R.R. Martin", "pages": 694}, 
+*/
 
 //GRABBING LIBRARY DIV FROM HTML
 const displayLibrary = document.querySelector(".library");
 
-//BOOK OBJECT
-function Book(title, author, pages){
+//BOOK OBJECT 
+/*
+function Book(title, author, pages, data){
     this.title = title
     this.author = author
     this.pages = pages
-}
+    this.data = data
+} */
+
+//VALIDATES FORM
+const iTitle = document.getElementById("bookTitle");
+const iAuthor = document.getElementById("author");
+const iPages = document.getElementById("pages");
+const subBtn = document.getElementById("subBtn");
+
+iTitle.addEventListener("input", () => {
+  if (iTitle.validity.tooShort){
+    iTitle.setCustomValidity("Do it right");
+  } else {
+    iTitle.setCustomValidity("");
+  }
+})
+
+iAuthor.addEventListener("input", () => {
+  if (iAuthor.validity.tooShort){
+    iAuthor.setCustomValidity("Do it right");
+  } else {
+    iAuthor.setCustomValidity("");
+  }
+})
+
+iPages.addEventListener("input", () => {
+  if (iPages.validity.rangeUnderflow){
+    iPages.setCustomValidity("Do it right");
+  } else {
+    iPages.setCustomValidity("");
+  }
+})
+
+subBtn.addEventListener('click', () => {
+  if (iTitle.validity.valid && iAuthor.validity.valid && iPages.validity.valid) {
+    new Book(iTitle.value, iAuthor.value, iPages.value);
+    storeArr();
+  }
+})
 
 //STORES BOOKS IN LIBRARY ARRAY
-function addBookToLibrary(title, author, pages) {
-    let numbPages = Number(pages);
-    if (numbPages <= 0) {
-      return alert("Page number cannot be negative or zero.")
-    }
-    if (title.length <= 0 || author.length <= 0 || pages.length <= 0) {
-      return alert("Please do not leave any forms blank.")
-    }
+function Book(title, author, pages) {
+  (this.title = title),
+  (this.author = author),
+  (this.pages = pages);
+
+  myLibrary.push({ title, author, pages });
+
       //create card
     const displayBook = document.createElement("div");
     displayLibrary.appendChild(displayBook);
     displayBook.setAttribute("id", "book");
     displayBook.setAttribute("data-i", myLibrary.length);
+
       //create delete button
     const delBtn = document.createElement("button");
     displayBook.appendChild(delBtn);
@@ -36,7 +82,9 @@ function addBookToLibrary(title, author, pages) {
       const btnNumb = delBtn.getAttribute("data-i");
       const del = document.querySelector(`div[data-i="${btnNumb}"]`);
       del.remove();
+      localStorage.removeItem(`item-${title}`);
     }
+
       //create card content
         //title
       const displayBookTitle = document.createElement("div");
@@ -53,7 +101,8 @@ function addBookToLibrary(title, author, pages) {
       displayBook.appendChild(displayBookPages);
       displayBookPages.setAttribute("id", "pages");
       displayBookPages.textContent = `${pages} Pages`;
-      //create read check
+
+    //create read check
     const check = document.createElement("input");
     displayBook.appendChild(check);
     check.setAttribute("type", "checkbox");
@@ -62,15 +111,29 @@ function addBookToLibrary(title, author, pages) {
     displayBook.appendChild(label);
     label.setAttribute("for", "read");
     label.textContent = "Finished?";
-  return myLibrary.push(new Book(title, author, numbPages));
 }
 
-//TESTING ARRAY
-addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 295);
-addBookToLibrary("Dune", "Frank Herbert", 412);
-addBookToLibrary("Pet Semetary", "Stephen King", 373);
-addBookToLibrary("A Game of Thrones", "George R.R. Martin", 694);
 
+//LOCAL STORAGE
+function getArr() {
+  const keys = Object.keys(localStorage);
+  for (let i = 0; i <= keys.length; i++) {
+    const array = localStorage.getItem(keys[i]);
+    const obj = JSON.parse(array);
+    new Book(
+      obj.title,
+      obj.author,
+      obj.pages
+    );
+  }
+}
+getArr();
+
+function storeArr() {
+  for (let i = 0; i < myLibrary.length; i++) {
+    localStorage.setItem(`item-${myLibrary[i].title}`, JSON.stringify(myLibrary[i]));
+  }
+}
 
 
 
