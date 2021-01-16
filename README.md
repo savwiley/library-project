@@ -1,6 +1,6 @@
 # Library: TOP JS Project
 
-This project was made almost entirely with Javascript. Information about the To-Do List Project can be found [here](https://theodinproject.com/courses/javascript/lessons/library).
+This project was made almost entirely with Javascript. Information about the Library Project can be found [here](https://theodinproject.com/courses/javascript/lessons/library).
 
 [Preview my site here!](https://savwiley.github.io/library-project/)
 
