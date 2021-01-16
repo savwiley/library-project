@@ -29,7 +29,7 @@ input, button {outline:none;}
 #libraryForm {
     margin: 0 auto 10px;
     border: 0px solid;
-    width: 20%;
+    width: 30%;
     text-align:right;
 }
 #libraryForm input {
@@ -40,19 +40,23 @@ input, button {outline:none;}
 }
 #libraryForm input[type=text], #libraryForm input[type=number] {background: #fff;}
 #libraryForm input[type=text]:hover, #libraryForm input[type=number]:hover {box-shadow: 2px 2px 2px rgba(0,0,0,0.4);}
-#libraryForm input[type=button] {
+#libraryForm input[type=submit] {
     cursor:pointer;
     color: #000;
     background: #fff;
     background-size: 0;
     transition: all 0.5s ease-in-out;
 }
-#libraryForm input[type=button]:hover {
+#libraryForm input[type=submit]:hover {
     background: linear-gradient(120deg, #fff, #eee);
     background-repeat:no-repeat;
     background-size: 100%;
     background-position: 0% 50%;
     box-shadow: 2px 2px 2px rgba(0,0,0,0.4);
+}
+
+#libraryForm input:invalid {
+    box-shadow: 2px 2px 2px rgba(214, 39, 39, 0.4);
 }
 
 
