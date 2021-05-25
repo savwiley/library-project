@@ -1,3 +1,32 @@
+// Firebase App (the core Firebase SDK) is always required and must be listed first
+import firebase from "firebase/app";
+// If you are using v7 or any earlier version of the JS SDK, you should import firebase using namespace import
+// import * as firebase from "firebase/app"
+
+// If you enabled Analytics in your project, add the Firebase SDK for Analytics
+import "firebase/analytics";
+
+// Add the Firebase products that you want to use
+import "firebase/auth";
+import "firebase/firestore";
+
+// TODO: Replace the following with your app's Firebase project configuration
+// For Firebase JavaScript SDK v7.20.0 and later, `measurementId` is an optional field
+const firebaseConfig = {
+  apiKey: "AIzaSyCcPq3J_Yeex39izUWyerDoNRPan9XWwJw",
+  authDomain: "library-79cdb.firebaseapp.com",
+  projectId: "library-79cdb",
+  storageBucket: "library-79cdb.appspot.com",
+  messagingSenderId: "603775734043",
+  appId: "1:603775734043:web:47b551a4110cb35f2143be",
+  measurementId: "G-CGHSMSDCVY"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+
+
 //LIBRARY
 let myLibrary = []; 
 
