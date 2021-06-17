@@ -1,4 +1,4 @@
-const firebase = require("firebase/app");
+const firebase = require("firebase");
 
 const firebaseConfig = {
   apiKey: "AIzaSyCcPq3J_Yeex39izUWyerDoNRPan9XWwJw",
@@ -60,7 +60,8 @@ iPages.addEventListener("input", () => {
   }
 })
 
-subBtn.addEventListener('click', () => {
+subBtn.addEventListener('click', (e) => {
+  e.preventDefault();
   if (iTitle.validity.valid && iAuthor.validity.valid && iPages.validity.valid) {
     new Book(iTitle.value, iAuthor.value, iPages.value);
     storeArr();
