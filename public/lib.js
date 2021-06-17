@@ -1,7 +1,3 @@
-const firebase = require("./firebase.js");
-
-
-
 //LIBRARY
 let myLibrary = []; 
 
