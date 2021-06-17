@@ -111,7 +111,7 @@ function Book(title, author, pages) {
 
 //FIRESTOR
 async function getArr() {
-  const docs = await firebase.firestore().collection(Books).get();
+  const docs = await firebase.firestore().collection("Books").get();
   docs.forEach(e => {
     new Book(
       e.data().title,
@@ -123,7 +123,7 @@ async function getArr() {
 getArr();
 
 async function deleteBook(title) {
-  await firebase.firestore().collection(Books).doc(title).delete();
+  await firebase.firestore().collection("Books").doc(title).delete();
 }
 
 async function storeArr() {
@@ -133,7 +133,7 @@ async function storeArr() {
       author: myLibrary[i].author,
       pages: myLibrary[i].pages,
     }
-    await firebase.firestore().collection(Books).doc(data.title).set(data);
+    await firebase.firestore().collection("Books").doc(data.title).set(data);
   }
 }
 
