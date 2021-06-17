@@ -1,4 +1,4 @@
-import firebase from "./firebase";
+const firebase = require("./firebase.js");
 
 
 
