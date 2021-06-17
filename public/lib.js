@@ -1,17 +1,5 @@
-// Firebase App (the core Firebase SDK) is always required and must be listed first
-import firebase from "firebase/app";
-// If you are using v7 or any earlier version of the JS SDK, you should import firebase using namespace import
-// import * as firebase from "firebase/app"
+const firebase = require("firebase/app");
 
-// If you enabled Analytics in your project, add the Firebase SDK for Analytics
-import "firebase/analytics";
-
-// Add the Firebase products that you want to use
-import "firebase/auth";
-import "firebase/firestore";
-
-// TODO: Replace the following with your app's Firebase project configuration
-// For Firebase JavaScript SDK v7.20.0 and later, `measurementId` is an optional field
 const firebaseConfig = {
   apiKey: "AIzaSyCcPq3J_Yeex39izUWyerDoNRPan9XWwJw",
   authDomain: "library-79cdb.firebaseapp.com",
@@ -40,14 +28,7 @@ let myLibrary = [];
 //GRABBING LIBRARY DIV FROM HTML
 const displayLibrary = document.querySelector(".library");
 
-//BOOK OBJECT 
-/*
-function Book(title, author, pages, data){
-    this.title = title
-    this.author = author
-    this.pages = pages
-    this.data = data
-} */
+//BOOK OBJECT
 
 //VALIDATES FORM
 const iTitle = document.getElementById("bookTitle");
@@ -111,7 +92,8 @@ function Book(title, author, pages) {
       const btnNumb = delBtn.getAttribute("data-i");
       const del = document.querySelector(`div[data-i="${btnNumb}"]`);
       del.remove();
-      localStorage.removeItem(`item-${title}`);
+      deleteBook(title);
+      //localStorage.removeItem(`item-${title}`);
     }
 
       //create card content
@@ -143,21 +125,35 @@ function Book(title, author, pages) {
 }
 
 
-//LOCAL STORAGE
-function getArr() {
-  const keys = Object.keys(localStorage);
-  for (let i = 0; i <= keys.length; i++) {
-    const array = localStorage.getItem(keys[i]);
-    const obj = JSON.parse(array);
+//FIRESTOR
+async function getArr() {
+  const docs = await firebase.firestore().collection(Books).get();
+  docs.forEach(e => {
     new Book(
-      obj.title,
-      obj.author,
-      obj.pages
-    );
-  }
+      e.data().title,
+      e.data().author,
+      e.data().pages,
+    )
+  })
 }
 getArr();
 
+async function deleteBook(title) {
+  await firebase.firestore().collection(Books).doc(title).delete();
+}
+
+async function storeArr() {
+  for (let i = 0; i < myLibrary.length; i++) {
+    let data = {
+      title: myLibrary[i].title,
+      author: myLibrary[i].author,
+      pages: myLibrary[i].pages,
+    }
+    await firebase.firestore().collection(Books).doc(data.title).set(data);
+  }
+}
+
+/*
 function storeArr() {
   for (let i = 0; i < myLibrary.length; i++) {
     localStorage.setItem(`item-${myLibrary[i].title}`, JSON.stringify(myLibrary[i]));
@@ -166,5 +162,12 @@ function storeArr() {
 
 
 
+    //adds score
+    async function addHighScore() {
+      if (diff !== undefined) {
+        await firebase.firestore().collection(scoreCollection).doc().set(data);
+      }
+    }
 
+*/
 
