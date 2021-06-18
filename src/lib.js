@@ -77,7 +77,6 @@ function Book(title, author, pages) {
       const del = document.querySelector(`div[data-i="${btnNumb}"]`);
       del.remove();
       deleteBook(title);
-      //localStorage.removeItem(`item-${title}`);
     }
 
       //create card content
@@ -136,22 +135,4 @@ async function storeArr() {
     await firebase.firestore().collection("Books").doc(data.title).set(data);
   }
 }
-
-/*
-function storeArr() {
-  for (let i = 0; i < myLibrary.length; i++) {
-    localStorage.setItem(`item-${myLibrary[i].title}`, JSON.stringify(myLibrary[i]));
-  }
-}
-
-
-
-    //adds score
-    async function addHighScore() {
-      if (diff !== undefined) {
-        await firebase.firestore().collection(scoreCollection).doc().set(data);
-      }
-    }
-
-*/
 
