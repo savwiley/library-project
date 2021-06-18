@@ -77,6 +77,7 @@ function Book(title, author, pages) {
       const del = document.querySelector(`div[data-i="${btnNumb}"]`);
       del.remove();
       deleteBook(title);
+      //localStorage.removeItem(`item-${title}`);
     }
 
       //create card content
