@@ -1,15 +1,9 @@
 //LIBRARY
 let myLibrary = []; 
 
-/*
-  {"title": "The Hobbit", "author": "J.R.R. Tolkien", "pages": 295}, 
-  {"title": "Dune", "author": "Frank Herbert", "pages": 412}, 
-  {"title": "Pet Semetary", "author": "Stephen King", "pages": 373}, 
-  {"title": "A Game of Thrones", "author": "George R.R. Martin", "pages": 694}, 
-*/
-
-//GRABBING LIBRARY DIV FROM HTML
+//GRABBING DIVS
 const displayLibrary = document.querySelector(".library");
+const loading = document.querySelector(".loading");
 
 //BOOK OBJECT
 
@@ -21,7 +15,7 @@ const subBtn = document.getElementById("subBtn");
 
 iTitle.addEventListener("input", () => {
   if (iTitle.validity.tooShort){
-    iTitle.setCustomValidity("Do it right");
+    iTitle.setCustomValidity("Please input a title.");
   } else {
     iTitle.setCustomValidity("");
   }
@@ -29,7 +23,7 @@ iTitle.addEventListener("input", () => {
 
 iAuthor.addEventListener("input", () => {
   if (iAuthor.validity.tooShort){
-    iAuthor.setCustomValidity("Do it right");
+    iAuthor.setCustomValidity("Please input an author.");
   } else {
     iAuthor.setCustomValidity("");
   }
@@ -37,7 +31,7 @@ iAuthor.addEventListener("input", () => {
 
 iPages.addEventListener("input", () => {
   if (iPages.validity.rangeUnderflow){
-    iPages.setCustomValidity("Do it right");
+    iPages.setCustomValidity("Please input page numbers.");
   } else {
     iPages.setCustomValidity("");
   }
@@ -48,6 +42,9 @@ subBtn.addEventListener('click', (e) => {
   if (iTitle.validity.valid && iAuthor.validity.valid && iPages.validity.valid) {
     new Book(iTitle.value, iAuthor.value, iPages.value);
     storeArr();
+    iTitle.value = "";
+    iAuthor.value = "";
+    iPages.value = "";
   }
 })
 
@@ -77,7 +74,6 @@ function Book(title, author, pages) {
       const del = document.querySelector(`div[data-i="${btnNumb}"]`);
       del.remove();
       deleteBook(title);
-      //localStorage.removeItem(`item-${title}`);
     }
 
       //create card content
@@ -98,6 +94,7 @@ function Book(title, author, pages) {
       displayBookPages.textContent = `${pages} Pages`;
 
     //create read check
+    //currently not remembered in server
     const check = document.createElement("input");
     displayBook.appendChild(check);
     check.setAttribute("type", "checkbox");
@@ -109,9 +106,10 @@ function Book(title, author, pages) {
 }
 
 
-//FIRESTOR
+//FIRESTORE
 async function getArr() {
   const docs = await firebase.firestore().collection("Books").get();
+  loading.remove();
   docs.forEach(e => {
     new Book(
       e.data().title,
