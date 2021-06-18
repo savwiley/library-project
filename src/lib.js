@@ -109,7 +109,6 @@ function Book(title, author, pages) {
 //FIRESTORE
 async function getArr() {
   const docs = await firebase.firestore().collection("Books").get();
-  loading.remove();
   docs.forEach(e => {
     new Book(
       e.data().title,
@@ -117,6 +116,7 @@ async function getArr() {
       e.data().pages,
     )
   })
+  loading.remove();
 }
 getArr();
 
