@@ -10,13 +10,7 @@ This project was made with Webpack & Firebase. Information about TOP's Library P
 
 ## Coming Soon
 
-- Loading screen.
-- Inputs clear on submit.
-- Option to edit current books.
-- Personal accounts & log-in authentication.
-- Personal accounts will hold what books have/haven't been read.
-- New site style.
-- New tab.
+Find an active list of upcoming features [here](https://github.com/savwiley/library-project/issues/2).
 
 ## Credits
 
