@@ -1,15 +1,18 @@
 # Library: TOP JS Project
 
-This project was made with Webpack & Firebase. Information about the Library Project can be found [here](https://theodinproject.com/courses/javascript/lessons/library). However, after learning more about JS, I have gone back and added extra features to the project.
+This project was made with Webpack & Firebase. Information about TOP's Library Project can be found [here](https://theodinproject.com/courses/javascript/lessons/library). However, after learning more about JS, I have gone back and added extra features to the project.
 
 [Preview my site here!](https://savwiley.github.io/library-project/dist/)
 
 ## Extra Features
 
-- A universal library that holds book info on a Firebase server.
+- A universal library that holds book information on a Firebase server.
 
 ## Coming Soon
 
+- Loading screen.
+- Inputs clear on submit.
+- Option to edit current books.
 - Personal accounts & log-in authentication.
 - Personal accounts will hold what books have/haven't been read.
 - New site style.
