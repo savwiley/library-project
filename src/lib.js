@@ -48,6 +48,12 @@ subBtn.addEventListener('click', (e) => {
   }
 })
 
+//gets random color
+const randColor = () => {
+  const color = Math.floor(Math.random() * 256)
+  return color;
+}
+
 //STORES BOOKS IN LIBRARY ARRAY
 function Book(title, author, pages) {
   (this.title = title),
@@ -58,6 +64,7 @@ function Book(title, author, pages) {
 
       //create card
     const displayBook = document.createElement("div");
+    displayBook.style.background = `rgba(${randColor()}, ${randColor()}, ${randColor()})`;
     displayLibrary.appendChild(displayBook);
     displayBook.setAttribute("id", "book");
     displayBook.setAttribute("data-i", myLibrary.length);
@@ -77,9 +84,14 @@ function Book(title, author, pages) {
     }
 
       //create card content
+        //link
+      const linkTitle = title.split(" ").join("_");
+      const bookLink = document.createElement("a");
+      bookLink.setAttribute("href", `https://en.wikipedia.org/wiki/${linkTitle}_(novel)`);
+      displayBook.appendChild(bookLink);
         //title
       const displayBookTitle = document.createElement("div");
-      displayBook.appendChild(displayBookTitle);
+      bookLink.appendChild(displayBookTitle);
       displayBookTitle.setAttribute("id", "title");
       displayBookTitle.textContent = title;
        //author
