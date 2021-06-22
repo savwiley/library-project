@@ -38,6 +38,7 @@ iPages.addEventListener("input", () => {
 });
 
 let edit;
+let editCount = 0;
 subBtn.addEventListener("click", (e) => {
   e.preventDefault();
   if (edit) {
@@ -52,11 +53,12 @@ subBtn.addEventListener("click", (e) => {
     iAuthor.validity.valid &&
     iPages.validity.valid
   ) {
-    new Book(iTitle.value, iAuthor.value, iPages.value);
+    new Book(iTitle.value, iAuthor.value, iPages.value, editCount);
     storeArr();
     iTitle.value = "";
     iAuthor.value = "";
     iPages.value = "";
+    editCount = 0;
   }
 });
 
@@ -67,10 +69,10 @@ const randColor = () => {
 };
 
 //STORES BOOKS IN LIBRARY ARRAY
-function Book(title, author, pages) {
-  (this.title = title), (this.author = author), (this.pages = pages);
+function Book(title, author, pages, readCount = 0) {
+  (this.title = title), (this.author = author), (this.pages = pages), (this.readCount = readCount);
 
-  myLibrary.push({ title, author, pages });
+  myLibrary.push({ title, author, pages, readCount });
 
   //create card
   const displayBook = document.createElement("div");
@@ -89,8 +91,16 @@ function Book(title, author, pages) {
     iAuthor.value = author;
     iPages.value = pages;
     edit = e.path[0].dataset.i;
+    editCount = readCount;
   }
   displayBook.appendChild(editBtn);
+
+  /**
+   * EDIT NEEDS WORK
+   * I think, instead of using the submit btn's func, we need a whole new thing. It's a good solution until the read count was added. Find a way for both to exist.
+   * 
+   * It works right in Firestore. The problem is the myLibrary array. Things need to be edited in there *and* resubmited to Firestore.
+   */
 
   //create delete button
   const delBtn = document.createElement("button");
@@ -130,7 +140,33 @@ function Book(title, author, pages) {
   displayBook.appendChild(displayBookPages);
   displayBookPages.setAttribute("id", "pages");
   displayBookPages.textContent = `${pages} Pages`;
+  //read count
+  const displayBookCount = document.createElement("div");
+  displayBook.appendChild(displayBookCount);
+  displayBookCount.setAttribute("id", "count");
+  displayBookCount.textContent = `read by ${readCount} users`;
+  //read btn
+  const readCountBtn = document.createElement("button");
+  displayBook.appendChild(readCountBtn);
+  readCountBtn.setAttribute("id", "readBtn");
+  readCountBtn.textContent = "I've Read This!";
+  readCountBtn.addEventListener("click", () => {
+    updateCount();
+  });
+  async function updateCount() {
+    displayBookCount.textContent = `read by ${readCount + 1} users`;
+    readCountBtn.remove();
+    let newNumb = readCount + 1;
+    let data = {
+      title: title,
+      author: author,
+      pages: pages,
+      readCount: newNumb,
+    };
+    await firebase.firestore().collection("Books").doc(title).set(data);
+  };
 
+  /*
   //create read check
   //currently not remembered in server
   const check = document.createElement("input");
@@ -141,13 +177,14 @@ function Book(title, author, pages) {
   displayBook.appendChild(label);
   label.setAttribute("for", "read");
   label.textContent = "Finished?";
+  */
 }
 
 //FIRESTORE
 async function getArr() {
   const docs = await firebase.firestore().collection("Books").get();
   docs.forEach((e) => {
-    new Book(e.data().title, e.data().author, e.data().pages);
+    new Book(e.data().title, e.data().author, e.data().pages, e.data().readCount);
   });
   loading.remove();
 }
@@ -163,6 +200,7 @@ async function storeArr() {
       title: myLibrary[i].title,
       author: myLibrary[i].author,
       pages: myLibrary[i].pages,
+      readCount: myLibrary[i].readCount,
     };
     await firebase.firestore().collection("Books").doc(data.title).set(data);
   }
