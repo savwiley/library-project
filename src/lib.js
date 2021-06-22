@@ -183,6 +183,7 @@ function signInAuth(email, password) {
 };
 
 signUpBtn.addEventListener("click", () => {
+  e.preventDefault();
   signUpAuth(emailI.value, passI.value)
 });
 function signUpAuth(email, password) {
