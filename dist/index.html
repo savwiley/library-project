@@ -17,33 +17,6 @@
   </head>
   <body>
 
-    <div class="header">
-      <form id="signInForm">
-        <input 
-          type="email"
-          name="email"
-          placeholder="email"
-          minlength="1"
-          id="username"
-          required
-        />
-        <input 
-          type="password"
-          name="password"
-          placeholder="password"
-          minlength="1"
-          id="password"
-          required
-        />
-        <input
-          type="submit"
-          value="Sign In"
-          id="signIn"
-        />
-        <button id="signUp">Sign Up</button>
-      </form>
-    </div>
-
     <span id="pageTitle">The Library</span>
 
     <form id="libraryForm">
@@ -87,8 +60,6 @@
   
     <b>Found spam?</b> Books can be deleted by clicking on the X button on the top left of each card. Be careful! Once you click that button, the book is deleted forever (until someone adds it back to The Library).<br /><br />
   
-    <b>Want your own library?</b> Sign-in or make your account via the header above to have your own private library.<br /><br />
-  
     <b>Found a bug?</b> If you've found something wrong with the app or have an idea for new/better features, feel free to submit your issues <a href="https://github.com/savwiley/library-project/issues">here</a>.
       </details></div>
 
@@ -111,7 +82,6 @@
     <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
     
     <!-- Add Firebase products that you want to use -->
-    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-firestore.js"></script>
 
     <script>
