@@ -38,9 +38,15 @@ iPages.addEventListener("input", () => {
 });
 
 let edit;
-
 subBtn.addEventListener("click", (e) => {
   e.preventDefault();
+  if (edit) {
+    const element = document.querySelector(`div[data-i="${edit}"]`);
+    const titleDiv = element.querySelector("#title");
+    deleteBook(titleDiv.textContent);
+    element.remove();
+    edit = null;
+  }
   if (
     iTitle.validity.valid &&
     iAuthor.validity.valid &&
@@ -51,13 +57,6 @@ subBtn.addEventListener("click", (e) => {
     iTitle.value = "";
     iAuthor.value = "";
     iPages.value = "";
-  }
-  if (edit) {
-    const element = document.querySelector(`div[data-i="${edit}"]`);
-    const titleDiv = element.querySelector("#title");
-    deleteBook(titleDiv.textContent);
-    element.remove();
-    edit = null;
   }
 });
 // ^ doesn't want to remove the div element but it does edit in firebase
@@ -86,12 +85,11 @@ function Book(title, author, pages) {
   editBtn.setAttribute("class", "far fa-edit");
   editBtn.setAttribute("data-i", myLibrary.length);
   editBtn.addEventListener("click", editButton);
-  function editButton() {
+  function editButton(e) {
     iTitle.value = title;
     iAuthor.value = author;
     iPages.value = pages;
-    const index = delBtn.getAttribute("data-i");
-    edit = index;
+    edit = e.path[0].dataset.i;
   }
   displayBook.appendChild(editBtn);
 
