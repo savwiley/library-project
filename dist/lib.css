@@ -1,7 +1,11 @@
 /* GENERAL */
 
+* {
+  margin: 0;
+}
+
 body {
-  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-family: 'Open Sans', sans-serif;
   background: #ebebeb;
 }
 
@@ -10,13 +14,22 @@ button {
   outline: none;
 }
 
+/* HEADER */
+
+.header {
+  background: rgba(0,0,0,0.1);
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
 /* TITLE */
 
 #pageTitle {
   float: left;
   padding: 20px 0 0 10px;
   font-size: 85px;
-  font-family: Dancing Script;
+  font-family: 'Dancing Script', sans-serif;
   cursor: default;
 }
 
@@ -25,10 +38,20 @@ button {
 #credit a {
   text-align: center;
   display: block;
-  width: 100%;
+  width: fit-content;
+  margin: auto;
+  padding: 0 2px;
   text-decoration: none;
   color: rgb(102, 102, 102);
   font-variant: small-caps;
+  letter-spacing: 2px;
+  font-size: 10px;
+  font-weight: bold;
+  transition: all 1s;
+}
+#credit a:hover {
+  background: rgb(102, 102, 102,0.5);
+  color: #ebebeb;
 }
 
 /* LOADING */
@@ -116,6 +139,32 @@ button {
   box-shadow: 2px 2px 2px rgba(143, 23, 23, 0.4);
 }
 
+/* INFO */
+
+.information {
+  width: 40vw;
+  background: rgba(0,0,0,0.1);
+  margin: 0 auto 20px;
+  padding: 10px;
+  text-align: justify;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-left: none;
+  border-right: none;
+  font-size: 12px;
+  cursor: default;
+}
+.information summary {
+  font-weight: bold;
+  outline: none;
+  cursor: pointer;
+  letter-spacing: 1px;
+  background: rgba(0,0,0,0.1);
+  text-align: center;
+}
+.information a{
+  color: #000;
+}
+
 /* BOOKS */
 
 .library {
@@ -165,7 +214,8 @@ button {
   font-size: 13px;
   margin-bottom: 10px;
 }
-#delete {
+
+#delete, .fa-edit {
   display: block;
   width: 25px;
   height: 25px;
@@ -178,9 +228,20 @@ button {
   cursor: pointer;
   transition: all 0.5s;
 }
-#delete:hover {
+#delete:hover, .fa-edit:hover {
   background: rgba(255, 255, 255, 0.8);
 }
+
+.fa-edit {
+  color: #000;
+  text-shadow: none;
+  float: right;
+  font-weight: normal;
+  font-size: 13px;
+  height: 20px;
+  padding-top: 5px;
+}
+
 #read {
   cursor: pointer;
 }
@@ -196,6 +257,9 @@ button {
   #libraryForm {
     text-align: right;
     width: 45%;
+  }
+  .information {
+    width: 80vw;
   }
 }
 @media (max-width: 650px) {
