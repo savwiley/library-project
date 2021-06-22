@@ -59,7 +59,6 @@ subBtn.addEventListener("click", (e) => {
     iPages.value = "";
   }
 });
-// ^ doesn't want to remove the div element but it does edit in firebase
 
 //gets random color
 const randColor = () => {
@@ -168,3 +167,24 @@ async function storeArr() {
     await firebase.firestore().collection("Books").doc(data.title).set(data);
   }
 }
+
+//AUTHENTICATION
+const emailI = document.querySelector("#username");
+const passI = document.querySelector("#password");
+const signInBtn = document.querySelector("#signIn");
+const signUpBtn = document.querySelector("#signUp");
+
+signInBtn.addEventListener("click", () => {
+  e.preventDefault();
+  signInAuth(emailI.value, passI.value);
+});
+function signInAuth(email, password) {
+  firebase.auth().signInWithEmailAndPassword(email, password);
+};
+
+signUpBtn.addEventListener("click", () => {
+  signUpAuth(emailI.value, passI.value)
+});
+function signUpAuth(email, password) {
+  firebase.auth().createUserWithEmailAndPassword(email, password);
+};
