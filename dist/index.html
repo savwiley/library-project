@@ -6,7 +6,7 @@
     <link href="lib.css" rel="stylesheet" />
 
     <link
-      href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Open+Sans&display=swap"
       rel="stylesheet"
     />
 
@@ -16,6 +16,7 @@
     ></script>
   </head>
   <body>
+    <div class="header"></div>
     <span id="pageTitle">The Library</span>
 
     <form id="libraryForm">
@@ -24,7 +25,7 @@
         type="text"
         name="bookTitle"
         id="bookTitle"
-        placeholder="'The Hobbit'"
+        placeholder="The Hobbit"
         minlength="1"
         required
       /><br />
@@ -47,8 +48,22 @@
         placeholder="295"
         required
       /><br />
-      <input type="submit" id="subBtn" value="Submit" />
+      <input type="submit" id="subBtn" value="Submit Book" />
     </form>
+
+    <div class="information">The Library holds book information that has been inputted by anyone. The books submitted will always be here. Feel free to add your own books with the form above.<br /><br />
+    
+      <details><summary>F.A.Q.</summary><br />
+    <b>Want to add a book?</b> Use the form above to input your book's information. Please make sure the title is correct. When you click submit, your book will be added to The Library along with a Google search link to further information about your book.<br /><br />
+  
+    <b>See a mistake?</b> Click on the edit button on the top right of each card. The form above will fill with the provided information. You can change anything from there.<br /><br />
+  
+    <b>Found spam?</b> Books can be deleted by clicking on the X button on the top left of each card. Be careful! Once you click that button, the book is deleted forever (until someone adds it back to The Library).<br /><br />
+  
+    <b>Want your own library?</b> Sign-in or make your account via the header above to have your own private library.<br /><br />
+  
+    <b>Found a bug?</b> If you've found something wrong with the app or have an idea for new/better features, feel free to submit your issues <a href="https://github.com/savwiley/library-project/issues">here</a>.
+      </details></div>
 
     <div class="library">
       <div class="loading">
