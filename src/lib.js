@@ -186,5 +186,8 @@ signUpBtn.addEventListener("click", () => {
   signUpAuth(emailI.value, passI.value)
 });
 function signUpAuth(email, password) {
-  firebase.auth().createUserWithEmailAndPassword(email, password);
+  firebase.auth().createUserWithEmailAndPassword(email, password)
+  .then((userCredential) => {
+    console.log(userCredential);
+  });
 };
